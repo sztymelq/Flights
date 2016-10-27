@@ -1,8 +1,5 @@
 export default function (dispatcher) {
     const ctrl = this;
-    ctrl.filterByName = filterByName;
-    ctrl.filterByCountry = filterByCountry;
-    ctrl.filterByIATA = filterByIATA;
 
     dispatcher.subscribe(onNewData);
 
@@ -13,23 +10,4 @@ export default function (dispatcher) {
         ctrl.airportsData = event.data;
     }
 
-    function filterByName(airport) {
-        return isStringMatched(airport.name);
-    }
-
-    function filterByCountry(airport) {
-        return isStringMatched(airport.country.name);
-    }
-
-    function filterByIATA(airport) {
-        return isStringMatched(airport.iataCode);
-    }
-
-    function isStringMatched(query) {
-        return lowerCase(query).indexOf(lowerCase(ctrl.searchQuery)) !== -1;
-    }
-
-    function lowerCase(target) {
-        return target.toLowerCase();
-    }
 }

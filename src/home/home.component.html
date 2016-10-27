@@ -19,11 +19,7 @@
 </nav>
   <section>
       <div class="container">
-          <input type="text" class="input" placeholder="Search airport..." ng-model="$ctrl.searchQuery" ng-change="$ctrl.onQueryChange()">
-          <ul ng-if="$ctrl.searchQuery">
-              <li ng-repeat="airport in $ctrl.airportsData.airports | filter : $ctrl.filterByName : $ctrl.filterByCountry : $ctrl.filterByIATA"
-                      class="airports-search-item">{{airport.name}}</li>
-          </ul>
+          <airport-selector airports="$ctrl.airportsData.airports" input-placeholder="Search origin airport..."></airport-selector>
       </div>
       <pre class="box">
 <strong>
