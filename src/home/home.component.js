@@ -1,24 +1,12 @@
 import template from './home.component.html';
+import controller from './home.component.controller.js';
 import './home.component.scss';
 
-homeComponentCtrl.$inject = ['AirportsService'];
+controller.$inject = ['dispatcher'];
 
 export const HomeComponent = {
     bindings: {},
     template,
-    controller: homeComponentCtrl
+    controller
 };
 
-function homeComponentCtrl(AirportsService) {
-    let airportsData;
-    AirportsService.getAll().then(onNewData, onAirportsFetchError);
-
-    function onNewData(response) {
-        airportsData = response.data;
-        console.log('airportsData', airportsData);
-    }
-
-    function onAirportsFetchError(response) {
-        throw new Error('homeComponentCtrl: Could not fetch data from server.', response);
-    }
-}
