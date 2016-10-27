@@ -1,0 +1,10 @@
+.airports-search-item {
+    cursor: default;
+    border-radius: 0.5em;
+    padding: 1em;
+
+    &:hover {
+        color: white;
+        background-color: blue;
+    }
+}
