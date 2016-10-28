@@ -8,7 +8,7 @@
         </span>
     </div>
     <ul ng-if="$ctrl.isAutoCompleteVisible" class="airports-search-results">
-        <li ng-repeat="airport in $ctrl.airports | filter : $ctrl.isAirportMatched"
+        <li ng-repeat="airport in $ctrl.airportsAvailable | filter : $ctrl.isAirportMatched"
             ng-click="$ctrl.onAirportSelected(airport)"
             class="airports-search-item">{{airport.name}} ({{airport.country.name}})</li>
     </ul>

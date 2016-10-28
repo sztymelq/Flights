@@ -11,8 +11,6 @@ export default function (dispatcher) {
     ctrl.removeIconClicked = removeIconClicked;
 
     function removeIconClicked() {
-        if (!ctrl.isAirportSelected) return;
-
         clearSearchQuery();
         hideAutoComplete();
         onAirportDeselected();
@@ -42,10 +40,16 @@ export default function (dispatcher) {
     }
 
     function onAirportSelected(airport) {
+        console.log('airport', airport);
         dispatcher.notify(dispatcher.constants.AIRPORT_SELECTED, airport);
         ctrl.isAirportSelected = true;
-        ctrl.searchQuery = airport.name;
+        displayAirportChosen(airport);
+        //ctrl.searchQuery = airport.name;
         hideAutoComplete();
+    }
+
+    function displayAirportChosen(airport) {
+        ctrl.searchQuery = `${airport.name} (${airport.country.name})`;
     }
 
     function isAirportMatched(airport) {

@@ -5,7 +5,7 @@ controller.$inject = ['dispatcher'];
 
 export const AirportSelectorComponent = {
     bindings: {
-        airports: '<',
+        airportsAvailable: '<',
         inputPlaceholder: '@'
     },
     template,

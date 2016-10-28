@@ -13,6 +13,8 @@ export const AirportsService = ($http, dispatcher) => {
             case dispatcher.constants.AIRPORT_SELECTED:
                 storeSelectedAirport(event.data);
                 if (originAirport) onOriginAirportAdded();
+                if (destinationAirport) notifyRouteConfigured();
+
                 console.log('destinationAirport', destinationAirport);
                 console.log('originAirport', originAirport);
 
@@ -40,12 +42,24 @@ export const AirportsService = ($http, dispatcher) => {
         getRoutes
     };
 
+    function notifyRouteConfigured() {
+        dispatcher.notify(dispatcher.constants.ROUTE_CONFIGURED, {});
+    }
+
     function onOriginAirportRemoved() {
         dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_REMOVED, originAirport);
     }
 
     function onOriginAirportAdded() {
-        dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_ADDED, originAirport);
+        const availableRoutes = getRoutes()[getIATA(originAirport)];
+        const availableDestinations = getAirports().filter((airport) => {
+            return availableRoutes.includes(getIATA(airport));
+        });
+
+        dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_ADDED, {
+            airport: originAirport,
+            availableDestinations: availableDestinations
+        });
     }
 
     function clearSelectedAirport() {
@@ -56,6 +70,10 @@ export const AirportsService = ($http, dispatcher) => {
     function storeSelectedAirport(airport) {
         if (!originAirport) originAirport = airport;
         else destinationAirport = airport;
+    }
+
+    function getIATA(airport) {
+        return airport.iataCode;
     }
 
     function initialize() {
