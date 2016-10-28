@@ -11,6 +11,8 @@ export default function (dispatcher) {
     ctrl.removeIconClicked = removeIconClicked;
 
     function removeIconClicked() {
+        if (!ctrl.isAirportSelected) return;
+
         clearSearchQuery();
         hideAutoComplete();
         onAirportDeselected();
@@ -18,7 +20,7 @@ export default function (dispatcher) {
 
     function onFocus() {
         clearSearchQuery();
-        onAirportDeselected();
+        ctrl.isAirportSelected = false;
         ctrl.isAutoCompleteVisible = true;
     }
 

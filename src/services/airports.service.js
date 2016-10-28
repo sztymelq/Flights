@@ -6,17 +6,23 @@ export const AirportsService = ($http, dispatcher) => {
     let destinationAirport = null;
     let originAirport = null;
 
-
     dispatcher.subscribe(onUserAction);
 
     function onUserAction(event) {
         switch (event.type) {
             case dispatcher.constants.AIRPORT_SELECTED:
                 storeSelectedAirport(event.data);
+                if (originAirport) onOriginAirportAdded();
+                console.log('destinationAirport', destinationAirport);
+                console.log('originAirport', originAirport);
 
                 break;
             case dispatcher.constants.AIRPORT_DESELECTED:
+                clearSelectedAirport();
+                if (!originAirport) onOriginAirportRemoved();
 
+                console.log('destinationAirport', destinationAirport);
+                console.log('originAirport', originAirport);
 
                 break;
             default:
@@ -33,6 +39,19 @@ export const AirportsService = ($http, dispatcher) => {
         getMessages,
         getRoutes
     };
+
+    function onOriginAirportRemoved() {
+        dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_REMOVED, originAirport);
+    }
+
+    function onOriginAirportAdded() {
+        dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_ADDED, originAirport);
+    }
+
+    function clearSelectedAirport() {
+        if (!destinationAirport) originAirport = null;
+        else destinationAirport = null;
+    }
 
     function storeSelectedAirport(airport) {
         if (!originAirport) originAirport = airport;

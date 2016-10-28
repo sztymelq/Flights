@@ -20,6 +20,7 @@
   <section>
       <div class="container">
           <airport-selector airports="$ctrl.airportsData.airports" input-placeholder="Search origin airport..."></airport-selector>
+          <airport-selector ng-if="$ctrl.isDestinationInputVisible" airports="$ctrl.airportsData.airports" input-placeholder="Search destination airport..."></airport-selector>
       </div>
       <pre class="box">
 <strong>

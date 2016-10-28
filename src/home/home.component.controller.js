@@ -1,6 +1,6 @@
 export default function (dispatcher) {
     const ctrl = this;
-    ctrl.destinationAirportSelected = false;
+    ctrl.isDestinationInputVisible = false;
     ctrl.$onDestroy = destroyHandler;
 
     dispatcher.subscribe(onNewData);
@@ -9,6 +9,12 @@ export default function (dispatcher) {
         switch(event.type) {
             case dispatcher.constants.AIRPORTS_DATA_RECEIVED:
                 saveAirportsData(event.data);
+                break;
+            case dispatcher.constants.ORIGIN_AIRPORT_ADDED:
+                ctrl.isDestinationInputVisible = true;
+                break;
+            case dispatcher.constants.ORIGIN_AIRPORT_REMOVED:
+                ctrl.isDestinationInputVisible = false;
                 break;
             default:
                 break;
