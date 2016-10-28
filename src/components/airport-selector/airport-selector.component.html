@@ -1,7 +1,10 @@
 <div class="airport-selector-root">
     <div class="airport-selector-input-container">
-        <input type="text" class="input is-info" placeholder="{{$ctrl.inputPlaceholder}}"
-               ng-model="$ctrl.searchQuery" ng-change="$ctrl.clearAirportSelected()" ng-focus="$ctrl.onFocus()">
+        <label>
+            <b>{{$ctrl.inputLabel}}</b>
+            <input type="text" class="input is-info" placeholder="{{$ctrl.inputPlaceholder}}"
+                   ng-model="$ctrl.searchQuery" ng-change="$ctrl.clearAirportSelected()" ng-focus="$ctrl.onFocus()">
+        </label>
 
         <span ng-click="$ctrl.removeIconClicked()" class="icon search-query-remove-icon" ng-class="{'element-faded': !$ctrl.airportSelected}">
             <i class="fa fa-times"></i>

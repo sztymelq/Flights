@@ -35,7 +35,7 @@ export const AirportsService = ($http, dispatcher) => {
     };
 
     function notifyRouteConfigured() {
-        dispatcher.notify(dispatcher.constants.ROUTE_CONFIGURED, {});
+        dispatcher.notify(dispatcher.constants.ROUTE_CONFIGURED, {origin: originAirport, destination: destinationAirport});
     }
 
     function onOriginAirportRemoved() {

@@ -3,7 +3,9 @@ import controller from './airport-tile.controller.js';
 
 
 export const AirportTileComponent = {
-        bindings: {},
+        bindings: {
+            airport: '<'
+        },
         template,
         controller
     };

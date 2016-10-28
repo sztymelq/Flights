@@ -1,0 +1,13 @@
+<div class="airport-tile-root">
+    <div class="tile-top centered">
+        {{$ctrl.airport.country.name}}
+    </div>
+
+    <div class="tile-mid centered">
+        {{$ctrl.airport.country.code | uppercase}}
+    </div>
+
+    <div class="tile-bottom centered">
+        {{$ctrl.airport.name}} ({{$ctrl.airport.iataCode}})
+    </div>
+</div>
