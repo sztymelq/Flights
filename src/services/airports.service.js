@@ -1,8 +1,28 @@
 export const AirportsService = ($http, dispatcher) => {
-    let data;
     const config = {
         url: 'https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/'
     };
+    let data;
+    let destinationAirport = null;
+    let originAirport = null;
+
+
+    dispatcher.subscribe(onUserAction);
+
+    function onUserAction(event) {
+        switch (event.type) {
+            case dispatcher.constants.AIRPORT_SELECTED:
+                storeSelectedAirport(event.data);
+
+                break;
+            case dispatcher.constants.AIRPORT_DESELECTED:
+
+
+                break;
+            default:
+                break;
+        }
+    }
 
     return {
         initialize,
@@ -13,6 +33,11 @@ export const AirportsService = ($http, dispatcher) => {
         getMessages,
         getRoutes
     };
+
+    function storeSelectedAirport(airport) {
+        if (!originAirport) originAirport = airport;
+        else destinationAirport = airport;
+    }
 
     function initialize() {
         fetchData().then(saveAndNotify, onFetchError);

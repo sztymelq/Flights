@@ -4,7 +4,8 @@ function dispatcher() {
     const subscribers = [];
     const constants = {
        AIRPORTS_DATA_RECEIVED: 'AIRPORTS_DATA_RECEIVED',
-       AIRPORT_SELECTED: 'AIRPORT_SELECTED'
+       AIRPORT_SELECTED: 'AIRPORT_SELECTED',
+       AIRPORT_DESELECTED: 'AIRPORT_DESELECTED'
     };
 
     return {

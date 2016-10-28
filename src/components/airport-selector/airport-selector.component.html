@@ -3,7 +3,7 @@
         <input type="text" class="input" placeholder="{{$ctrl.inputPlaceholder}}"
                ng-model="$ctrl.searchQuery" ng-change="$ctrl.onQueryChange()" ng-focus="$ctrl.onFocus()">
 
-        <span ng-click="$ctrl.removeIconClicked()" class="icon search-query-remove-icon">
+        <span ng-click="$ctrl.removeIconClicked()" class="icon search-query-remove-icon" ng-class="{'element-faded': !$ctrl.isAirportSelected}">
             <i class="fa fa-times"></i>
         </span>
     </div>
