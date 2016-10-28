@@ -5,7 +5,6 @@ import Components from './components/components';
 import { HomeComponent } from './home/home.component';
 import {CheapFlightService, AirportsService} from './services';
 
-console.log('Components', Components);
 
 angular.module('myApp', [uiRouter, Components])
     .service('AirportsService', ['$http', 'dispatcher', AirportsService])

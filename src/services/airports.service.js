@@ -54,7 +54,6 @@ export const AirportsService = ($http, dispatcher) => {
     }
 
     function fetchData() {
-        console.log('fetch data');
         return $http.get(config.url);
     }
 };

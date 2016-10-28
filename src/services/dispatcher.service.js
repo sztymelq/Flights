@@ -3,7 +3,8 @@ export default dispatcher;
 function dispatcher() {
     const subscribers = [];
     const constants = {
-       AIRPORTS_DATA_RECEIVED: 'AIRPORTS_DATA_RECEIVED'
+       AIRPORTS_DATA_RECEIVED: 'AIRPORTS_DATA_RECEIVED',
+       AIRPORT_SELECTED: 'AIRPORT_SELECTED'
     };
 
     return {
@@ -14,7 +15,7 @@ function dispatcher() {
     };
 
     function subscribe(subscriber) {
-        if (!subscriber || subscribers.indexOf(subscriber) !== -1) return;
+        if (!subscriber || isAlreadySubscribed(subscriber)) return;
 
         subscribers.push(subscriber);
     }
@@ -30,5 +31,9 @@ function dispatcher() {
         subscribers.forEach(subscriber => {
             subscriber({type, data});
         })
+    }
+
+    function isAlreadySubscribed(subscriber) {
+        return subscribers.indexOf(subscriber) !== -1;
     }
 }

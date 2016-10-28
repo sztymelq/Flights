@@ -1,7 +1,9 @@
 <div class="airport-selector-root">
-    <input type="text" class="input" placeholder="{{$ctrl.inputPlaceholder}}" ng-model="$ctrl.searchQuery" ng-change="$ctrl.onQueryChange()">
-    <ul ng-if="$ctrl.searchQuery" class="airports-search-results">
+    <input type="text" class="input" placeholder="{{$ctrl.inputPlaceholder}}"
+           ng-model="$ctrl.searchQuery" ng-change="$ctrl.onQueryChange()">
+    <ul ng-if="$ctrl.isAutoCompleteVisible()" class="airports-search-results">
         <li ng-repeat="airport in $ctrl.airports | filter : $ctrl.isAirportMatched"
+            ng-click="$ctrl.onAirportSelected(airport)"
             class="airports-search-item">{{airport.name}} ({{airport.country.name}})</li>
     </ul>
 </div>

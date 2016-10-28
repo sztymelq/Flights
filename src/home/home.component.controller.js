@@ -1,13 +1,30 @@
 export default function (dispatcher) {
     const ctrl = this;
+    ctrl.destinationAirportSelected = false;
 
     dispatcher.subscribe(onNewData);
 
-    function onNewData(event) {
-        console.log('event', event);
-        if (event.type !== dispatcher.constants.AIRPORTS_DATA_RECEIVED) return;
+    ctrl.$onDestroy = destroyHandler;
 
-        ctrl.airportsData = event.data;
+    function onNewData(event) {
+        switch(event.type) {
+            case dispatcher.constants.AIRPORTS_DATA_RECEIVED:
+                saveAirportsData(event.data);
+                break;
+            case dispatcher.constants.AIRPORT_SELECTED:
+                console.log('airport selected', event.data);
+                ctrl.destinationAirportSelected = true;
+                break;
+            default:
+                break;
+        }
     }
 
+    function saveAirportsData(data) {
+        ctrl.airportsData = data;
+    }
+
+    function destroyHandler() {
+        dispatcher.unsubscribe(onNewData);
+    }
 }
