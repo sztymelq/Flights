@@ -14,18 +14,10 @@ export const AirportsService = ($http, dispatcher) => {
                 storeSelectedAirport(event.data);
                 if (originAirport) onOriginAirportAdded();
                 if (destinationAirport) notifyRouteConfigured();
-
-                console.log('destinationAirport', destinationAirport);
-                console.log('originAirport', originAirport);
-
                 break;
             case dispatcher.constants.AIRPORT_DESELECTED:
-                clearSelectedAirport();
+                clearDeselectedAirport(event.data);
                 if (!originAirport) onOriginAirportRemoved();
-
-                console.log('destinationAirport', destinationAirport);
-                console.log('originAirport', originAirport);
-
                 break;
             default:
                 break;
@@ -62,9 +54,9 @@ export const AirportsService = ($http, dispatcher) => {
         });
     }
 
-    function clearSelectedAirport() {
-        if (!destinationAirport) originAirport = null;
-        else destinationAirport = null;
+    function clearDeselectedAirport(airport) {
+        if (airport === originAirport) originAirport = null;
+        if (airport === destinationAirport) destinationAirport = null;
     }
 
     function storeSelectedAirport(airport) {

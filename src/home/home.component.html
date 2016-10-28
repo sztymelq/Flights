@@ -19,8 +19,10 @@
 </nav>
   <section>
       <div class="container">
-          <airport-selector airports-available="$ctrl.airportsData.airports" input-placeholder="Search origin airport..."></airport-selector>
-          <airport-selector ng-if="$ctrl.isDestinationInputVisible" airports-available="$ctrl.availableDestinations" input-placeholder="Search destination airport..."></airport-selector>
+          <airport-selector airports-available="$ctrl.airportsData.airports"
+                            input-placeholder="{{$ctrl.airportsData.messages.choose_departure_airport}}"></airport-selector>
+          <airport-selector ng-if="$ctrl.isDestinationInputVisible" airports-available="$ctrl.availableDestinations"
+                            input-placeholder="{{$ctrl.airportsData.messages.choose_destination_airport}}"></airport-selector>
       </div>
       <pre class="box">
 <strong>

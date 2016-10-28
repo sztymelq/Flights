@@ -2,11 +2,11 @@ export default function (dispatcher) {
     const ctrl = this;
 
     clearSearchQuery();
-    ctrl.isAirportSelected = false;
+    ctrl.airportSelected = null;
     ctrl.isAutoCompleteVisible = false;
     ctrl.isAirportMatched = isAirportMatched;
     ctrl.onAirportSelected = onAirportSelected;
-    ctrl.onQueryChange = onQueryChange;
+    ctrl.clearAirportSelected = clearAirportSelected;
     ctrl.onFocus = onFocus;
     ctrl.removeIconClicked = removeIconClicked;
 
@@ -18,12 +18,12 @@ export default function (dispatcher) {
 
     function onFocus() {
         clearSearchQuery();
-        ctrl.isAirportSelected = false;
+        onAirportDeselected();
         ctrl.isAutoCompleteVisible = true;
     }
 
-    function onQueryChange() {
-        ctrl.isAirportSelected = false;
+    function clearAirportSelected() {
+        ctrl.airportSelected = null;
     }
 
     function clearSearchQuery() {
@@ -35,16 +35,15 @@ export default function (dispatcher) {
     }
 
     function onAirportDeselected() {
-        dispatcher.notify(dispatcher.constants.AIRPORT_DESELECTED, {});
-        ctrl.isAirportSelected = false;
+        dispatcher.notify(dispatcher.constants.AIRPORT_DESELECTED, ctrl.airportSelected);
+        ctrl.airportSelected = null;
     }
 
     function onAirportSelected(airport) {
         console.log('airport', airport);
         dispatcher.notify(dispatcher.constants.AIRPORT_SELECTED, airport);
-        ctrl.isAirportSelected = true;
+        ctrl.airportSelected = airport;
         displayAirportChosen(airport);
-        //ctrl.searchQuery = airport.name;
         hideAutoComplete();
     }
 
