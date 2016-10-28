@@ -1,1 +1,19 @@
 $primary: #2780ff;
+
+.airport-selector-root {
+    margin: 1em;
+    .airport-selector-input-container {
+      position: relative;
+
+      .search-query-remove-icon {
+          position: absolute;
+          right: 0.5em;
+          bottom: 0.2em;
+
+          &:hover {
+              color: $primary;
+          }
+      }
+    }
+
+}

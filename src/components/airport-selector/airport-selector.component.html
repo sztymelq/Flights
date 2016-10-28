@@ -1,7 +1,13 @@
 <div class="airport-selector-root">
-    <input type="text" class="input" placeholder="{{$ctrl.inputPlaceholder}}"
-           ng-model="$ctrl.searchQuery" ng-change="$ctrl.onQueryChange()">
-    <ul ng-if="$ctrl.isAutoCompleteVisible()" class="airports-search-results">
+    <div class="airport-selector-input-container">
+        <input type="text" class="input" placeholder="{{$ctrl.inputPlaceholder}}"
+               ng-model="$ctrl.searchQuery" ng-change="$ctrl.onQueryChange()" ng-focus="$ctrl.onFocus()">
+
+        <span ng-click="$ctrl.removeIconClicked()" class="icon search-query-remove-icon">
+            <i class="fa fa-times"></i>
+        </span>
+    </div>
+    <ul ng-if="$ctrl.isAutoCompleteVisible" class="airports-search-results">
         <li ng-repeat="airport in $ctrl.airports | filter : $ctrl.isAirportMatched"
             ng-click="$ctrl.onAirportSelected(airport)"
             class="airports-search-item">{{airport.name}} ({{airport.country.name}})</li>
