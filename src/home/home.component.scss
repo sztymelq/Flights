@@ -1,12 +1,17 @@
 @import '../scss/main';
 
-.airports-search-item {
+.airports-search-results {
+  overflow-y: auto;
+  height: 20em;
+
+  .airports-search-item {
     cursor: default;
     border-radius: 0.5em;
     padding: 1em;
 
     &:hover {
-        color: white;
-        background-color: $primary;
+      color: white;
+      background-color: $primary;
     }
+  }
 }
