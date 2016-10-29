@@ -2,7 +2,7 @@
 
 .airports-search-results {
   overflow-y: auto;
-  height: 20em;
+  height: 15em;
 
   .airports-search-item {
     cursor: default;
@@ -27,5 +27,12 @@
 
   .flights-search-button {
     width: 50%;
+  }
+}
+
+.flights-action-icon {
+    margin-left: 0.5em;
+  &:hover {
+    color: $primary;
   }
 }

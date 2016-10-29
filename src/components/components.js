@@ -4,6 +4,7 @@ import { DateSelectorComponent } from './date-selector/date-selector.component';
 import { AirportSelectorComponent } from './airport-selector/airport-selector.component';
 import { AirportTileComponent } from './airport-tile/airport-tile.component';
 import { FlightsFormComponent } from './flights-form/flights-form.component';
+import { FlightsTableComponent } from './flights-table/flights-table.component';
 
 export default angular.module('app.components', [])
 .component('dateWrapper', DateWrapperComponent)
@@ -11,4 +12,5 @@ export default angular.module('app.components', [])
 .component('airportSelector', AirportSelectorComponent)
 .component('airportTile', AirportTileComponent)
 .component('flightsForm', FlightsFormComponent)
+.component('flightsTable', FlightsTableComponent)
 .name;

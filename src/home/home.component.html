@@ -33,6 +33,8 @@
 
               <flights-form route-info="$ctrl.routeInfo" messages="$ctrl.airportsData.messages"></flights-form>
           </div>
+
+          <flights-table ng-if="$ctrl.flightsVisible()" flights="$ctrl.flightsInfo"></flights-table>
       </div>
       <pre class="box">
 <strong>

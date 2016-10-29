@@ -3,7 +3,9 @@ export default function (dispatcher) {
     ctrl.isDestinationInputVisible = false;
     ctrl.airportsData = null;
     ctrl.routeInfo = null;
+    ctrl.flightsInfo = null;
     ctrl.$onDestroy = destroyHandler;
+    ctrl.flightsVisible = flightsVisible;
 
     dispatcher.subscribe(onNewData);
 
@@ -24,11 +26,16 @@ export default function (dispatcher) {
                 ctrl.routeInfo = event.data;
                 break;
             case dispatcher.constants.FLIGHTS_DATA_FETCHED:
-                console.log(event.data);
+                ctrl.flightsInfo = event.data.flights;
+                console.log('ctrl.flightsInfo', ctrl.flightsInfo);
                 break;
             default:
                 break;
         }
+    }
+
+    function flightsVisible() {
+        return ctrl.flightsInfo && ctrl.routeInfo;
     }
 
     function saveAirportsData(data) {

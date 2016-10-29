@@ -110,7 +110,6 @@ export const AirportsService = ($http, dispatcher) => {
         validateConfigInterface(config);
         const url = `https://murmuring-ocean-10826.herokuapp.com/en/api/2/flights/from/${config.origin.iataCode}/to/${config.destination.iataCode}/${config.dateFrom}/${config.dateTo}/250/unique/?limit=15&offset-0`;
 
-        console.log('url', url);
         return fetchData(url);
 
         function validateConfigInterface() {

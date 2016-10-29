@@ -1,0 +1,25 @@
+<div>
+    <table ng-show="$ctrl.flights.length" class="table">
+        <thead>
+        <tr>
+            <th ng-repeat="header in $ctrl.tableHeaders">{{header}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="flight in $ctrl.flights">
+            <td>{{$ctrl.formatDate(flight.dateFrom)}}</td>
+            <td>{{$ctrl.formatDate(flight.dateTo)}}</td>
+            <td>{{flight.price | currency : flight.currency}}</td>
+            <td>{{$ctrl.computeTravelTime(flight)}}</td>
+            <td>
+                <i class="fa fa-2x fa-shopping-cart flights-action-icon" aria-hidden="true"></i>
+                <i class="fa fa-2x fa-star flights-action-icon" aria-hidden="true"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-show="!$ctrl.flights.length" class="notification is-warning">
+        <i class="fa fa-2x fa-exclamation" style="color: red; margin-right: 2em" aria-hidden="true"></i>No flights available
+    </div>
+</div>
