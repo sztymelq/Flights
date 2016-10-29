@@ -1,5 +1,8 @@
 @import '../scss/main';
 
+$favourite: darkturquoise;
+$alert: red;
+
 .airports-search-results {
   overflow-y: auto;
   height: 15em;
@@ -35,4 +38,13 @@
   &:hover {
     color: $primary;
   }
+}
+
+.no-flights-icon {
+  color: $alert;
+  margin-right: 2em
+}
+
+.yellow-icon {
+  color: $favourite !important;
 }

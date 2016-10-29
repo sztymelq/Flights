@@ -1,4 +1,5 @@
 $primary: #2780ff;
+$tileText: white;
 
 .airport-selector-root {
     margin: 1em;
@@ -35,7 +36,7 @@ $primary: #2780ff;
   padding: 0.5em;
   background: $primary;
   margin: 1em;
-  color: white;
+  color: $tileText;
   cursor: default;
 
   .tile-mid {

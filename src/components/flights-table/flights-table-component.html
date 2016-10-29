@@ -2,7 +2,7 @@
     <table ng-show="$ctrl.flights.length" class="table">
         <thead>
         <tr>
-            <th ng-repeat="header in $ctrl.tableHeaders">{{header}}</th>
+            <th ng-click="$ctrl.sortBy(header)" ng-repeat="header in $ctrl.tableHeaders">{{header}}</th>
             <th></th>
         </tr>
         </thead>
@@ -14,12 +14,12 @@
             <td>{{$ctrl.computeTravelTime(flight)}}</td>
             <td>
                 <i class="fa fa-2x fa-shopping-cart flights-action-icon" aria-hidden="true"></i>
-                <i class="fa fa-2x fa-star flights-action-icon" aria-hidden="true"></i>
+                <i class="fa fa-2x fa-star flights-action-icon" ng-click="$ctrl.addFavourite(flight)" ng-class="{'yellow-icon': flight.favourite}" aria-hidden="true"></i>
             </td>
         </tr>
         </tbody>
     </table>
     <div ng-show="!$ctrl.flights.length" class="notification is-warning">
-        <i class="fa fa-2x fa-exclamation" style="color: red; margin-right: 2em" aria-hidden="true"></i>No flights available
+        <i class="fa fa-2x fa-exclamation no-flights-icon" aria-hidden="true"></i> No flights available
     </div>
 </div>
