@@ -40,14 +40,13 @@ export default function (dispatcher) {
     }
 
     function onAirportSelected(airport) {
-        console.log('airport', airport);
         dispatcher.notify(dispatcher.constants.AIRPORT_SELECTED, airport);
         ctrl.airportSelected = airport;
-        displayAirportChosen(airport);
+        displayChosenAirport(airport);
         hideAutoComplete();
     }
 
-    function displayAirportChosen(airport) {
+    function displayChosenAirport(airport) {
         ctrl.searchQuery = `${airport.name} (${airport.country.name})`;
     }
 

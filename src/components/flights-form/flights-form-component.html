@@ -1,0 +1,22 @@
+<div class="flights-form">
+    <date-wrapper class="flights-form-dates"
+                  start-date="$ctrl.startDate"
+                  end-date="$ctrl.endDate">
+    </date-wrapper>
+
+    <button ng-click="$ctrl.searchButtonClicked()" class="button is-info flights-search-button">Search flights!</button>
+    <div class="modal" ng-class="{'is-active': $ctrl.invalidInput}">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <article class="message is-danger">
+                <div class="message-header">
+                    Something went wrong :(
+                </div>
+                <div class="message-body">
+                    {{$ctrl.validationMessage}}
+                </div>
+            </article>
+        </div>
+        <button ng-click="$ctrl.hideValidationMessage()" class="modal-close"></button>
+    </div>
+</div>

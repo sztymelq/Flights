@@ -2,7 +2,7 @@ export const AirportsService = ($http, dispatcher) => {
     const config = {
         url: 'https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/'
     };
-    let data;
+    let airportsData;
     let destinationAirport = null;
     let originAirport = null;
 
@@ -19,19 +19,16 @@ export const AirportsService = ($http, dispatcher) => {
                 clearDeselectedAirport(event.data);
                 if (!originAirport) onOriginAirportRemoved();
                 break;
+            case dispatcher.constants.FLIGHTS_DATA_REQUESTED:
+                fetchFlights(event.data).then(onFlightsReceived, onFetchError);
+                break;
             default:
                 break;
         }
     }
 
     return {
-        initialize,
-        getAll,
-        getAirports,
-        getCountries,
-        getDiscounts,
-        getMessages,
-        getRoutes
+        initialize
     };
 
     function notifyRouteConfigured() {
@@ -69,45 +66,64 @@ export const AirportsService = ($http, dispatcher) => {
     }
 
     function initialize() {
-        fetchData().then(saveAndNotify, onFetchError);
+        fetchData(config.url).then(onAirportsReceived, onFetchError);
     }
 
     function getAirports() {
-        return data.airports;
-    }
-
-    function getCountries() {
-        return data.countries;
-    }
-
-    function getDiscounts() {
-        return data.discounts;
-    }
-
-    function getMessages() {
-        return data.messages;
+        return airportsData.airports;
     }
 
     function getRoutes() {
-        return data.routes;
+        return airportsData.routes;
     }
 
-    function saveAndNotify(response) {
-        if (response.status !== 200) return;
+    function onAirportsReceived(response) {
+        if (checkResponseStatus(response)) return;
 
-        data = response.data;
-        dispatcher.notify(dispatcher.constants.AIRPORTS_DATA_RECEIVED, data);
+        saveAirports(response.data);
+        dispatcher.notify(dispatcher.constants.AIRPORTS_DATA_RECEIVED, airportsData);
+    }
+
+    function onFlightsReceived(response) {
+        if (checkResponseStatus(response)) return;
+
+        dispatcher.notify(dispatcher.constants.FLIGHTS_DATA_FETCHED, response.data);
+    }
+
+    function saveAirports(data) {
+        airportsData = data;
+    }
+
+    function checkResponseStatus(response) {
+        return response.statusText !== 'OK';
     }
 
     function onFetchError(response) {
-        throw new Error('homeComponentCtrl: Could not fetch data from server.', response);
+        throw new Error('airportService: Could not fetch data from server.', response);
     }
 
-    function getAll() {
-        return data;
+    function fetchData(url) {
+        return $http.get(url);
     }
 
-    function fetchData() {
-        return $http.get(config.url);
+    function fetchFlights(config) {
+        validateConfigInterface(config);
+        const url = `https://murmuring-ocean-10826.herokuapp.com/en/api/2/flights/from/${config.origin.iataCode}/to/${config.destination.iataCode}/${config.dateFrom}/${config.dateTo}/250/unique/?limit=15&offset-0`;
+
+        console.log('url', url);
+        return fetchData(url);
+
+        function validateConfigInterface() {
+            const mandatory = ['origin', 'destination', 'dateFrom', 'dateTo'];
+            const missing = [];
+
+            mandatory.forEach((propertyName) => {
+                if (!Object.keys(config).includes(propertyName)) missing.push(propertyName);
+            });
+
+            if (missing.length) throw new Error('Invalid flights config interface, missing following properties: ' + missing);
+        }
     }
+
+
 };

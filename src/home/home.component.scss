@@ -7,11 +7,25 @@
   .airports-search-item {
     cursor: default;
     border-radius: 0.5em;
-    padding: 1em;
+    padding: 0.5em;
 
     &:hover {
       color: white;
       background-color: $primary;
     }
+  }
+}
+
+.flights-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .flights-form-dates {
+    margin-bottom: 3em;
+  }
+
+  .flights-search-button {
+    width: 50%;
   }
 }

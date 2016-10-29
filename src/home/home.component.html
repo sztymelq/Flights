@@ -19,19 +19,20 @@
 </nav>
   <section>
       <div class="container">
-          <airport-selector airports-available="$ctrl.airportsData.airports"
+          <airport-selector ng-if="$ctrl.airportsData" airports-available="$ctrl.airportsData.airports"
                             input-label="Departure"
                             input-placeholder="{{$ctrl.airportsData.messages.choose_departure_airport}}"></airport-selector>
           <airport-selector ng-if="$ctrl.isDestinationInputVisible" airports-available="$ctrl.availableDestinations"
                             input-label="Destination"
                             input-placeholder="{{$ctrl.airportsData.messages.choose_destination_airport}}"></airport-selector>
 
-          <div ng-if="$ctrl.flightsVisible" class="flights-component">
-              <airport-tile airport="$ctrl.flightsInfo.origin"></airport-tile>
+          <div ng-if="$ctrl.routeInfo" class="route-info">
+              <airport-tile airport="$ctrl.routeInfo.origin"></airport-tile>
               <i class="fa fa-plane fa-3x plane-icon" aria-hidden="true"></i>
-              <airport-tile airport="$ctrl.flightsInfo.destination"></airport-tile>
-          </div>
+              <airport-tile airport="$ctrl.routeInfo.destination"></airport-tile>
 
+              <flights-form route-info="$ctrl.routeInfo" messages="$ctrl.airportsData.messages"></flights-form>
+          </div>
       </div>
       <pre class="box">
 <strong>
@@ -97,9 +98,5 @@ https://murmuring-ocean-10826.herokuapp.com/en/api/2/flights/from/DUB/to/STN/201
 where DUBis the originating IATA code, STNis the destination IATA code,
 the first date range is the start of the period, and the second is the end.
     </pre>
-    <date-wrapper
-      start-date="$ctrl.startDate"
-      end-date="$ctrl.endDate">
-    </date-wrapper>
   </section>
 </div>
