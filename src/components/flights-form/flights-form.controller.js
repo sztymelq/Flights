@@ -1,4 +1,4 @@
-export default function FlightsFormCtrl (dispatcher) {
+export default function FlightsFormCtrl () {
     const ctrl = this;
 
     ctrl.searchButtonClicked = searchButtonClicked;
@@ -18,8 +18,11 @@ export default function FlightsFormCtrl (dispatcher) {
             return;
         }
 
-        const flightsData = Object.assign(ctrl.routeInfo, {dateFrom: convert(ctrl.startDate), dateTo: convert(ctrl.endDate)});
-        dispatcher.notify(dispatcher.constants.FLIGHTS_DATA_REQUESTED, flightsData);
+        const flightsReq = Object.assign(ctrl.routeInfo, {
+            dateFrom: convert(ctrl.startDate),
+            dateTo: convert(ctrl.endDate)
+        });
+        ctrl.searchCallback()(flightsReq);
     }
 
     function showValidationMessage() {

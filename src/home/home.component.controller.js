@@ -1,48 +1,57 @@
-export default function (dispatcher) {
+export default function (dispatcher, cheapFlightService) {
     const ctrl = this;
     ctrl.isDestinationInputVisible = false;
     ctrl.airportsData = null;
-    ctrl.routeInfo = null;
     ctrl.flightsInfo = null;
     ctrl.$onDestroy = destroyHandler;
     ctrl.flightsVisible = flightsVisible;
+    ctrl.searchFlightsCallback = searchFlightsCallback;
+    clearRouteInfo();
 
     dispatcher.subscribe(onNewData);
 
     function onNewData(event) {
         switch(event.type) {
             case dispatcher.constants.AIRPORTS_DATA_RECEIVED:
-                saveAirportsData(event.data);
+                assignAirportData(event.data);
                 break;
             case dispatcher.constants.ORIGIN_AIRPORT_ADDED:
-                saveAvailableDestinations(event.data);
+                assignAvailableDestinations(event.data);
                 ctrl.isDestinationInputVisible = true;
                 break;
             case dispatcher.constants.ORIGIN_AIRPORT_REMOVED:
-                ctrl.routeInfo = null;
+                clearRouteInfo();
                 ctrl.isDestinationInputVisible = false;
                 break;
             case dispatcher.constants.ROUTE_CONFIGURED:
                 ctrl.routeInfo = event.data;
-                break;
-            case dispatcher.constants.FLIGHTS_DATA_FETCHED:
-                ctrl.flightsInfo = event.data.flights;
-                console.log('ctrl.flightsInfo', ctrl.flightsInfo);
                 break;
             default:
                 break;
         }
     }
 
+    function searchFlightsCallback(flightsReq) {
+        cheapFlightService.fetch(flightsReq).then(storeFlights);
+    }
+
+    function storeFlights(flights) {
+        ctrl.flightsInfo = flights;
+    }
+
+    function clearRouteInfo() {
+        ctrl.routeInfo = null;
+    }
+
     function flightsVisible() {
         return ctrl.flightsInfo && ctrl.routeInfo;
     }
 
-    function saveAirportsData(data) {
+    function assignAirportData(data) {
         ctrl.airportsData = data;
     }
 
-    function saveAvailableDestinations(data) {
+    function assignAvailableDestinations(data) {
         ctrl.availableDestinations = data.availableDestinations;
     }
 

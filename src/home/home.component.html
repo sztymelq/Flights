@@ -21,17 +21,21 @@
       <div class="container">
           <airport-selector ng-if="$ctrl.airportsData" airports-available="$ctrl.airportsData.airports"
                             input-label="From"
-                            input-placeholder="{{$ctrl.airportsData.messages.choose_departure_airport}}"></airport-selector>
+                            input-placeholder="{{$ctrl.airportsData.messages.choose_departure_airport}}">
+          </airport-selector>
           <airport-selector ng-if="$ctrl.isDestinationInputVisible" airports-available="$ctrl.availableDestinations"
                             input-label="To"
-                            input-placeholder="{{$ctrl.airportsData.messages.choose_destination_airport}}"></airport-selector>
+                            input-placeholder="{{$ctrl.airportsData.messages.choose_destination_airport}}">
+          </airport-selector>
 
           <div ng-if="$ctrl.routeInfo" class="route-info">
               <airport-tile airport="$ctrl.routeInfo.origin"></airport-tile>
               <i class="fa fa-plane fa-3x plane-icon" aria-hidden="true"></i>
               <airport-tile airport="$ctrl.routeInfo.destination"></airport-tile>
 
-              <flights-form route-info="$ctrl.routeInfo" messages="$ctrl.airportsData.messages"></flights-form>
+              <flights-form route-info="$ctrl.routeInfo"
+                            messages="$ctrl.airportsData.messages"
+                            search-callback="$ctrl.searchFlightsCallback"></flights-form>
           </div>
 
           <flights-table ng-if="$ctrl.flightsVisible()" flights="$ctrl.flightsInfo"></flights-table>

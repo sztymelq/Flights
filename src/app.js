@@ -3,15 +3,16 @@ import uiRouter from 'angular-ui-router';
 import Dispatcher from './services/dispatcher.service.js';
 import Components from './components/components';
 import { HomeComponent } from './home/home.component';
-import {CheapFlightService, AirportsService} from './services';
+import {CheapFlightService, AirportsService, utils} from './services';
 
 
 angular.module('myApp', [uiRouter, Components])
-    .service('AirportsService', ['$http', 'dispatcher', AirportsService])
+    .service('AirportsService', ['dispatcher', 'utils', AirportsService])
     .run(['AirportsService', (AirportsService) => {AirportsService.initialize()}])
     .service('dispatcher', Dispatcher)
+    .service('utils', ['$http', utils])
     .component('homePage', HomeComponent)
-    .service('CheapFlightService', ['$http', CheapFlightService])
+    .service('CheapFlightService', ['dispatcher', 'utils', CheapFlightService])
     .config(($stateProvider) => {
         'ngInject';
           $stateProvider

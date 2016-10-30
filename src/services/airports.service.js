@@ -1,4 +1,4 @@
-export const AirportsService = ($http, dispatcher) => {
+export const AirportsService = (dispatcher, utils) => {
     const config = {
         url: 'https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/'
     };
@@ -18,9 +18,6 @@ export const AirportsService = ($http, dispatcher) => {
             case dispatcher.constants.AIRPORT_DESELECTED:
                 clearDeselectedAirport(event.data);
                 if (!originAirport) onOriginAirportRemoved();
-                break;
-            case dispatcher.constants.FLIGHTS_DATA_REQUESTED:
-                fetchFlights(event.data).then(onFlightsReceived, onFetchError);
                 break;
             default:
                 break;
@@ -66,7 +63,7 @@ export const AirportsService = ($http, dispatcher) => {
     }
 
     function initialize() {
-        fetchData(config.url).then(onAirportsReceived, onFetchError);
+        utils.fetchData(config.url).then(onAirportsReceived, utils.onFetchError);
     }
 
     function getAirports() {
@@ -78,51 +75,13 @@ export const AirportsService = ($http, dispatcher) => {
     }
 
     function onAirportsReceived(response) {
-        if (checkResponseStatus(response)) return;
+        if (utils.checkResponseStatus(response)) return;
 
         saveAirports(response.data);
         dispatcher.notify(dispatcher.constants.AIRPORTS_DATA_RECEIVED, airportsData);
     }
 
-    function onFlightsReceived(response) {
-        if (checkResponseStatus(response)) return;
-
-        dispatcher.notify(dispatcher.constants.FLIGHTS_DATA_FETCHED, response.data);
-    }
-
     function saveAirports(data) {
         airportsData = data;
     }
-
-    function checkResponseStatus(response) {
-        return response.statusText !== 'OK';
-    }
-
-    function onFetchError(response) {
-        throw new Error('airportService: Could not fetch data from server.', response);
-    }
-
-    function fetchData(url) {
-        return $http.get(url);
-    }
-
-    function fetchFlights(config) {
-        validateConfigInterface(config);
-        const url = `https://murmuring-ocean-10826.herokuapp.com/en/api/2/flights/from/${config.origin.iataCode}/to/${config.destination.iataCode}/${config.dateFrom}/${config.dateTo}/250/unique/?limit=15&offset-0`;
-
-        return fetchData(url);
-
-        function validateConfigInterface() {
-            const mandatory = ['origin', 'destination', 'dateFrom', 'dateTo'];
-            const missing = [];
-
-            mandatory.forEach((propertyName) => {
-                if (!Object.keys(config).includes(propertyName)) missing.push(propertyName);
-            });
-
-            if (missing.length) throw new Error('Invalid flights config interface, missing following properties: ' + missing);
-        }
-    }
-
-
 };
