@@ -2,6 +2,10 @@
 
 $flightsButtonWidth: 50%;
 
+.cheap-flights-root {
+  margin-top: 1em;
+}
+
 .airports-search-results {
   overflow-y: auto;
   height: 15em;
@@ -32,6 +36,9 @@ $flightsButtonWidth: 50%;
   }
 }
 
+.airport-selector {
+  cursor: pointer;
+}
 
 .airport-tile-root {
   width: 160px;
