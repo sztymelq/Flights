@@ -29,28 +29,6 @@ $tileText: white;
 
 }
 
-.airport-tile-root {
-  width: 160px;
-  height: 160px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px $primary solid;
-  border-radius: 0.5em;
-  padding: 0.5em;
-  background: $primary;
-  margin: 1em;
-  color: $tileText;
-  cursor: default;
-
-  .tile-mid {
-    font-weight: bold;
-    font-size: 5em;
-  }
-}
-
-
-
 .element-faded {
   opacity: 0.5;
 }

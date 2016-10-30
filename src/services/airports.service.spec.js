@@ -25,6 +25,7 @@ import {AirportsService} from './airports.service.js';
         after(function () {
             testData = null;
             dispatcher = null;
+            utilsMock = null;
         });
 
         it('Should initialize properly', function () {

@@ -39,7 +39,7 @@ export const CheapFlightService = (dispatcher, utils) => {
                 if (!Object.keys(config).includes(propertyName)) missing.push(propertyName);
             });
 
-            if (missing.length) throw new Error('Invalid flights config interface, missing following properties: ' + missing);
+            if (missing.length) throw 'Invalid flights config interface, missing following properties: ' + missing;
         }
     }
 };

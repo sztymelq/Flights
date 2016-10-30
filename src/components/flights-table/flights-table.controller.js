@@ -14,7 +14,7 @@ export default function FlightsTableCtrl () {
         return constants[name];
     });
     ctrl.formatDate = formatDate;
-    ctrl.addFavourite = addFavourite;
+    ctrl.toggleFavourite = toggleFavourite;
     ctrl.sortBy = sortBy;
     ctrl.$onChanges = computeTripDurations;
 
@@ -62,7 +62,7 @@ export default function FlightsTableCtrl () {
         return moment(date).format('LLL');
     }
 
-    function addFavourite(flight) {
+    function toggleFavourite(flight) {
         flight.favourite = !flight.favourite;
     }
 
