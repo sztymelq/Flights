@@ -33,7 +33,7 @@ export const AirportsService = (dispatcher, utils) => {
     }
 
     function onOriginAirportRemoved() {
-        dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_REMOVED, originAirport);
+        dispatcher.notify(dispatcher.constants.ORIGIN_AIRPORT_REMOVED);
     }
 
     function onOriginAirportAdded() {
