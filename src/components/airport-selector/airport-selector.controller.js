@@ -74,5 +74,3 @@ export default function (dispatcher) {
         return target.toLowerCase();
     }
 };
-
-

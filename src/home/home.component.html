@@ -20,10 +20,10 @@
   <section>
       <div class="container">
           <airport-selector ng-if="$ctrl.airportsData" airports-available="$ctrl.airportsData.airports"
-                            input-label="Departure"
+                            input-label="From"
                             input-placeholder="{{$ctrl.airportsData.messages.choose_departure_airport}}"></airport-selector>
           <airport-selector ng-if="$ctrl.isDestinationInputVisible" airports-available="$ctrl.availableDestinations"
-                            input-label="Destination"
+                            input-label="To"
                             input-placeholder="{{$ctrl.airportsData.messages.choose_destination_airport}}"></airport-selector>
 
           <div ng-if="$ctrl.routeInfo" class="route-info">

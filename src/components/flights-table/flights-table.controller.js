@@ -2,34 +2,41 @@ import moment from 'moment';
 
 export default function FlightsTableCtrl () {
     const ctrl = this;
+    let descending = false;
+    const constants = {
+        FLY_OUT: 'Fly out',
+        FLY_BACK: 'Fly back',
+        PRICE: 'Price',
+        TRIP_DURATION: 'Trip Duration'
+    };
 
-    ctrl.tableHeaders = ['Departure', 'Arrival', 'Price', 'Travel time'];
+    ctrl.tableHeaders = Object.keys(constants).map((name) => {
+        return constants[name];
+    });
     ctrl.formatDate = formatDate;
     ctrl.addFavourite = addFavourite;
     ctrl.sortBy = sortBy;
-    let descending = false;
-
-    ctrl.$onChanges = computeTravelTimes;
+    ctrl.$onChanges = computeTripDurations;
 
     function sortBy(header) {
         let sortingProperty;
         descending = !descending;
 
         switch (header) {
-            case 'Departure':
-                sortingProperty = 'dateFrom';
+            case constants.FLY_OUT:
+                setSortingProperty('dateFrom');
                 ctrl.flights.sort(byDate);
                 break;
-            case 'Arrival':
-                sortingProperty = 'dateTo';
+            case constants.FLY_BACK:
+                setSortingProperty('dateTo');
                 ctrl.flights.sort(byDate);
                 break;
-            case 'Price':
-                sortingProperty = 'price';
+            case constants.PRICE:
+                setSortingProperty('price');
                 ctrl.flights.sort(byValue);
                 break;
-            case 'Travel time':
-                sortingProperty = 'travelTime';
+            case constants.TRIP_DURATION:
+                setSortingProperty('tripDuration');
                 ctrl.flights.sort(byValue);
                 break;
             default:
@@ -45,6 +52,10 @@ export default function FlightsTableCtrl () {
             if (descending) return a[sortingProperty] > b[sortingProperty];
             else return a[sortingProperty] < b[sortingProperty];
         }
+
+        function setSortingProperty(value) {
+            sortingProperty = value;
+        }
     }
 
     function formatDate(date) {
@@ -55,11 +66,10 @@ export default function FlightsTableCtrl () {
         flight.favourite = !flight.favourite;
     }
 
-    function computeTravelTimes() {
+    function computeTripDurations() {
         ctrl.flights.forEach((flight) => {
             const diff = moment(flight.dateTo).diff(moment(flight.dateFrom));
-            flight.travelTime = moment.duration(diff);
+            flight.tripDuration = moment.duration(diff);
         });
-        console.log('ctrl.flights', ctrl.flights);
     }
 };

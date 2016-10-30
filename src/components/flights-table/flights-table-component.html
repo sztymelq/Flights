@@ -11,7 +11,7 @@
             <td>{{$ctrl.formatDate(flight.dateFrom)}}</td>
             <td>{{$ctrl.formatDate(flight.dateTo)}}</td>
             <td>{{flight.price | currency : flight.currency}}</td>
-            <td>{{flight.travelTime.humanize()}}</td>
+            <td>{{flight.tripDuration.humanize()}}</td>
             <td>
                 <i class="fa fa-2x fa-shopping-cart flights-action-icon" aria-hidden="true"></i>
                 <i class="fa fa-2x fa-star flights-action-icon" ng-click="$ctrl.addFavourite(flight)" ng-class="{'yellow-icon': flight.favourite}" aria-hidden="true"></i>
