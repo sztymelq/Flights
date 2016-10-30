@@ -1,4 +1,8 @@
-$primary: #2780ff;
+$primary: #073590;
+$info: #0D49C0;
+$success: #2091EB;
+$warning: #F1C933;
+$danger: #CF2E1D;
 $tileText: white;
 
 .airport-selector-root {
@@ -12,7 +16,7 @@ $tileText: white;
           bottom: 0.2em;
 
           &:hover {
-              color: $primary;
+              color: $success;
           }
       }
     }
@@ -26,8 +30,8 @@ $tileText: white;
 }
 
 .airport-tile-root {
-  width: 175px;
-  height: 175px;
+  width: 160px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -45,9 +49,7 @@ $tileText: white;
   }
 }
 
-.plane-icon {
-  transform: rotate(45deg);
-}
+
 
 .element-faded {
   opacity: 0.5;
@@ -58,3 +60,4 @@ $tileText: white;
   justify-content: center;
 }
 
+@import '../../node_modules/bulma/bulma.sass';

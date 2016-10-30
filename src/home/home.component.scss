@@ -1,19 +1,18 @@
 @import '../scss/main';
 
-$favourite: darkturquoise;
-$alert: red;
+$flightsButtonWidth: 50%;
 
 .airports-search-results {
   overflow-y: auto;
   height: 15em;
 
   .airports-search-item {
-    cursor: default;
+    cursor: pointer;
     border-radius: 0.5em;
     padding: 0.5em;
 
     &:hover {
-      color: white;
+      color: $tileText;
       background-color: $primary;
     }
   }
@@ -29,11 +28,12 @@ $alert: red;
   }
 
   .flights-search-button {
-    width: 50%;
+    width: $flightsButtonWidth;
   }
 }
 
 .flights-action-icon {
+    cursor: pointer;
     margin-left: 0.5em;
   &:hover {
     color: $primary;
@@ -41,12 +41,12 @@ $alert: red;
 }
 
 .no-flights-icon {
-  color: $alert;
+  color: $danger;
   margin-right: 2em
 }
 
 .yellow-icon {
-  color: $favourite !important;
+  color: $success !important;
 }
 
 .tableHeader {
@@ -54,4 +54,8 @@ $alert: red;
     color: $primary;
   }
   cursor: pointer;
+}
+
+.plane-icon {
+  transform: rotate(45deg);
 }
