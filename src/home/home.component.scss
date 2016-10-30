@@ -48,3 +48,10 @@ $alert: red;
 .yellow-icon {
   color: $favourite !important;
 }
+
+.tableHeader {
+  &:hover {
+    color: $primary;
+  }
+  cursor: pointer;
+}
